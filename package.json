@@ -1,0 +1,23 @@
+{
+  "name": "climatehub-api",
+  "version": "1.0.0",
+  "description": "Wednesdays from 5-8pm in SWNG 307. UBC Climate Hub API for MySQL database.",
+  "main": "rds-get-university.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodetheChangeFoundation/climatehub-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodetheChangeFoundation/climatehub-api/issues"
+  },
+  "homepage": "https://github.com/CodetheChangeFoundation/climatehub-api#readme",
+  "dependencies": {
+    "mysql": "^2.16.0",
+    "vandium": "^4.9.0"
+  }
+}
