@@ -1,5 +1,5 @@
-// Get all Universities or specified University
-// Endpoint: university/{ucode}
+// Get all Groups or specified Group
+// Endpoint: groups/{gid}
 
 var mysql = require('mysql');
 var config = require('./config.json');
@@ -14,10 +14,10 @@ var pool = mysql.createPool({
 exports.handler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    var sqlquery = 'SELECT * FROM University';
+    var sqlquery = 'SELECT * FROM `Group`';
     if (event['pathParameters']) {
-      if (event['pathParameters']['ucode']) {
-        sqlquery += ' WHERE UCode="' + event['pathParameters']['ucode'] + '"';
+      if (event['pathParameters']['gid']) {
+        sqlquery += ' WHERE GID="' + event['pathParameters']['gid'] + '"';
       }
     }
     connection.query(sqlquery, function (error, results, fields) {
