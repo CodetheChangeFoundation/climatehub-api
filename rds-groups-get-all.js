@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
   console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    let sqlquery = 'SELECT * FROM Group;';
+    let sqlquery = 'SELECT * FROM `Group`;';
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
       let response = {

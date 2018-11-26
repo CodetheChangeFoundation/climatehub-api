@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
   console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    let sqlquery = `SELECT * FROM Project p, Group g, TakesOn t WHERE p.PID=t.PID and g.GID=t.GID and g.GID='${event['pathParameters']['gid']}';`;
+    let sqlquery = 'SELECT * FROM Project p, `Group` g, TakesOn t WHERE p.PID=t.PID and g.GID=t.GID and g.GID="' + event['pathParameters']['gid'] + '";';
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
       let response = {
