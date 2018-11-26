@@ -1,5 +1,5 @@
-// Get specified Group
-// Endpoint: /groups/{gid}
+// Get all Individuals
+// Endpoint: /individuals
 
 let mysql = require('mysql');
 let config = require('./config.json');
@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
   console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    let sqlquery = `SELECT * FROM Group WHERE GID='${event['pathParameters']['gid']}';`;
+    let sqlquery = 'SELECT * FROM Individual;';
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
       let response = {
@@ -25,8 +25,7 @@ exports.handler = (event, context, callback) => {
         "body": JSON.stringify(results)
       }
       if (error) {
-        response.statusCode = 400;
-        callback(error, response);
+        callback(error);
       } else {
         callback(null, response);
       }

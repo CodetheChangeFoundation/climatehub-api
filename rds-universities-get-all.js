@@ -1,10 +1,10 @@
-// Get specified Group
-// Endpoint: /groups/{gid}
+// Get all Universities
+// Endpoint: /university
 
-let mysql = require('mysql');
-let config = require('./config.json');
+var mysql = require('mysql');
+var config = require('./config.json');
 
-let pool = mysql.createPool({
+var pool = mysql.createPool({
   host: config.host,
   user: config.user,
   password: config.password,
@@ -15,18 +15,17 @@ exports.handler = (event, context, callback) => {
   console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    let sqlquery = `SELECT * FROM Group WHERE GID='${event['pathParameters']['gid']}';`;
+    var sqlquery = 'SELECT * FROM University;';
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
-      let response = {
+      var response = {
         "isBase64Encoded": false,
         "statusCode": 200,
         "headers": {},
         "body": JSON.stringify(results)
       }
       if (error) {
-        response.statusCode = 400;
-        callback(error, response);
+        callback(error);
       } else {
         callback(null, response);
       }

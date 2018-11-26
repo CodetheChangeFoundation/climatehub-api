@@ -5,12 +5,7 @@ UBC Climate Hub API for MySQL database.
 
 ## Tech Stack
 - Node.js - Lambda function that connects to MySQL DB
-- Swagger Hub - https://app.swaggerhub.com/apis-docs/viniel/ClimateHub-Test/1.0.0#/
-
-## Getting Started
-##### Node version - `ex. 8.6.0`
-##### Npm version - `ex. 5.6.4`
-List of steps to take to initialize the project.
+- Swagger Hub - https://CodetheChangeFoundation.github.io/climatehub-api/
 
 ## License
 This project is licensed under the MIT License.

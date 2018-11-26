@@ -1,0 +1,292 @@
+swagger: "2.0"
+info:
+  description: "Climate Hub API"
+  version: "1.0.0"
+  title: "Food Bank"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "pritpal@codethechange.ca"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "https://CodetheChangeFoundation.github.io/climatehub-api/"
+basePath: "/"
+tags:
+- name: "groups"
+- name: "individuals"
+- name: "universities"
+- name: "projects"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /groups:
+    get:
+      tags:
+      - "groups"
+      summary: "Get all groups"
+      operationId: "groups-get-all"
+      responses:
+        200:
+          description: "All groups"
+          schema:
+            $ref: '#/definitions/Group'
+  /groups/{gid}:
+    get:
+      tags:
+      - "groups"
+      summary: "Get specified group"
+      operationId: "groups-get-gid"
+      parameters:
+      - in: "path"
+        name: "gid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Specified group"
+          schema:
+            $ref: '#/definitions/Group'
+        400:
+          description: "Bad request parameters"
+  /groups/{gid}/individuals:
+    get:
+      tags:
+      - "groups"
+      summary: "Get all individuals that belong to a group"
+      operationId: "groups-get-individuals"
+      parameters:
+      - in: "path"
+        name: "gid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "All individuals in group"
+          schema:
+            $ref: '#/definitions/Individual'
+        400:
+          description: "Bad request parameters"
+  /groups/{gid}/projects:
+    get:
+      tags:
+      - "groups"
+      summary: "Get all projects that belong to a group"
+      operationId: "groups-get-projects"
+      parameters:
+      - in: "path"
+        name: "gid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "All projects in group"
+          schema:
+            $ref: '#/definitions/Project'
+        400:
+          description: "Bad request parameters"
+  /individuals:
+    get:
+      tags:
+      - "individuals"
+      summary: "Get all individuals"
+      operationId: "individuals-get-all"
+      responses:
+        200:
+          description: "All individuals"
+          schema:
+            $ref: '#/definitions/Individual'
+  /individuals/{iid}:
+    get:
+      tags:
+      - "individuals"
+      summary: "Get specified individual"
+      operationId: "individuals-get-individual"
+      parameters:
+      - in: "path"
+        name: "iid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Specified individual"
+          schema:
+            $ref: '#/definitions/Individual'
+        400:
+          description: "Bad request parameters"
+  /individuals/{iid}/groups:
+    get:
+      tags:
+      - "individuals"
+      summary: "Get all groups that are associated with an individual"
+      operationId: "individuals-get-groups"
+      parameters:
+      - in: "path"
+        name: "iid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "All groups associated with an individual"
+          schema:
+            $ref: '#/definitions/Group'
+        400:
+          description: "Bad request parameters"
+  /projects:
+    get:
+      tags:
+      - "projects"
+      summary: "Get all projects"
+      operationId: "projects-get-all"
+      parameters:
+      - in: "path"
+        name: "gid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "All projects"
+          schema:
+            $ref: '#/definitions/Project'
+  /projects/{pid}:
+    get:
+      tags:
+      - "projects"
+      summary: "Get specified project"
+      operationId: "projects-get-project"
+      parameters:
+      - in: "path"
+        name: "pid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Specified project"
+          schema:
+            $ref: '#/definitions/Project'
+        400:
+          description: "Bad request parameters"
+  /projects/{pid}/groups:
+    get:
+      tags:
+      - "projects"
+      summary: "Get all groups associated with a project"
+      operationId: "projects-get-groups"
+      parameters:
+      - in: "path"
+        name: "pid"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "All groups associated with a project"
+          schema:
+            $ref: '#/definitions/Group'
+        400:
+          description: "Bad request parameters"
+  /university:
+    get:
+      tags:
+      - "university"
+      summary: "Get all universities"
+      operationId: "university-get-all"
+      parameters:
+      - in: "path"
+        name: "ucode"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "All universities"
+          schema:
+            $ref: '#/definitions/University'
+  /university/{ucode}:
+    get:
+      tags:
+      - "university"
+      summary: "Get specified university"
+      operationId: "university-get-university"
+      parameters:
+      - in: "path"
+        name: "ucode"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Specified university"
+          schema:
+            $ref: '#/definitions/University'
+        400:
+          description: "Bad request parameters"
+  /university/{ucode}/groups:
+    get:
+      tags:
+      - "university"
+      summary: "Get all groups associated with a university"
+      operationId: "university-get-groups"
+      parameters:
+      - in: "path"
+        name: "ucode"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "All groups associated with a university"
+          schema:
+            $ref: '#/definitions/Group'
+        400:
+          description: "Bad request parameters"
+definitions:
+  Group:
+    type: "object"
+    properties:
+      GID:
+        type: "integer"
+      UCode:
+        type: "string"
+      GroupName:
+        type: "string"
+      Tags:
+        type: "string"
+      ParentGroup:
+        type: "integer"
+  Individual:
+    type: "object"
+    properties:
+      IID:
+        type: "integer"
+      Name:
+        type: "string"
+      Position:
+        type: "string"
+      Email:
+        type: "string"
+      PhoneNumber:
+        type: "string"
+      SurveyInfo:
+        type: "string"
+  Project:
+    type: "object"
+    properties:
+      PID:
+        type: "integer"
+      ProjectName:
+        type: "string"
+      ProjectDescription:
+        type: "string"
+      ProjectDirector:
+        type: "integer"
+  University:
+    type: "object"
+    properties:
+      UID:
+        type: "integer"
+      UCode:
+        type: "string"
+      Name:
+        type: "string"
+      Address:
+        type: "string"

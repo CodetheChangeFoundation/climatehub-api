@@ -1,10 +1,10 @@
-// Get all Universities or specified University
-// Endpoint: university/{ucode}
+// Get specified University
+// Endpoint: /university/{ucode}
 
-var mysql = require('mysql');
-var config = require('./config.json');
+let mysql = require('mysql');
+let config = require('./config.json');
 
-var pool = mysql.createPool({
+let pool = mysql.createPool({
   host: config.host,
   user: config.user,
   password: config.password,
@@ -12,24 +12,24 @@ var pool = mysql.createPool({
 });
 
 exports.handler = (event, context, callback) => {
+  console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    var sqlquery = 'SELECT * FROM University';
-    if (event['pathParameters']) {
-      if (event['pathParameters']['ucode']) {
-        sqlquery += ' WHERE UCode="' + event['pathParameters']['ucode'] + '"';
-      }
-    }
+    let sqlquery = `SELECT * FROM University WHERE UCode='${event['pathParameters']['ucode']}';`;
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
-      var response = {
+      let response = {
         "isBase64Encoded": false,
         "statusCode": 200,
         "headers": {},
         "body": JSON.stringify(results)
       }
-      if (error) throw error;
-      else callback(null, response);
+      if (error) {
+        response.statusCode = 400;
+        callback(error, response);
+      } else {
+        callback(null, response);
+      }
     });
   });
 };
