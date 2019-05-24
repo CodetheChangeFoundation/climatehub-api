@@ -1,5 +1,5 @@
-// Get all Universities
-// Endpoint: /university
+// Get all Communities
+// Endpoint: /community
 
 var mysql = require('mysql');
 var config = require('./config.json');
@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
   console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    var sqlquery = 'SELECT * FROM University;';
+    var sqlquery = 'SELECT * FROM Community;';
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
       var response = {

@@ -23,7 +23,7 @@
       "name": "individuals"
     },
     {
-      "name": "universities"
+      "name": "communities"
     },
     {
       "name": "projects"
@@ -294,51 +294,51 @@
         }
       }
     },
-    "/university": {
+    "/community": {
       "get": {
         "tags": [
-          "university"
+          "communities"
         ],
-        "summary": "Get all universities",
-        "operationId": "university-get-all",
+        "summary": "Get all communities",
+        "operationId": "community-get-all",
         "parameters": [
           {
             "in": "path",
-            "name": "ucode",
+            "name": "ccode",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "All universities",
+            "description": "All communities",
             "schema": {
-              "$ref": "#/definitions/University"
+              "$ref": "#/definitions/Community"
             }
           }
         }
       }
     },
-    "/university/{ucode}": {
+    "/community/{ccode}": {
       "get": {
         "tags": [
-          "university"
+          "communities"
         ],
-        "summary": "Get specified university",
-        "operationId": "university-get-university",
+        "summary": "Get specified community",
+        "operationId": "community-get-community",
         "parameters": [
           {
             "in": "path",
-            "name": "ucode",
+            "name": "ccode",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Specified university",
+            "description": "Specified community",
             "schema": {
-              "$ref": "#/definitions/University"
+              "$ref": "#/definitions/Community"
             }
           },
           "400": {
@@ -347,24 +347,24 @@
         }
       }
     },
-    "/university/{ucode}/groups": {
+    "/community/{ccode}/groups": {
       "get": {
         "tags": [
-          "university"
+          "communities"
         ],
-        "summary": "Get all groups associated with a university",
-        "operationId": "university-get-groups",
+        "summary": "Get all groups associated with a community",
+        "operationId": "community-get-groups",
         "parameters": [
           {
             "in": "path",
-            "name": "ucode",
+            "name": "ccode",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "All groups associated with a university",
+            "description": "All groups associated with a community",
             "schema": {
               "$ref": "#/definitions/Group"
             }
@@ -383,10 +383,13 @@
         "GID": {
           "type": "integer"
         },
-        "UCode": {
+        "CCode": {
           "type": "string"
         },
         "GroupName": {
+          "type": "string"
+        },
+        "Description": {
           "type": "string"
         },
         "Tags": {
@@ -437,19 +440,22 @@
         }
       }
     },
-    "University": {
+    "Community": {
       "type": "object",
       "properties": {
-        "UID": {
+        "CID": {
           "type": "integer"
         },
-        "UCode": {
+        "CCode": {
           "type": "string"
         },
         "Name": {
           "type": "string"
         },
         "Address": {
+          "type": "string"
+        },
+        "Description": {
           "type": "string"
         }
       }

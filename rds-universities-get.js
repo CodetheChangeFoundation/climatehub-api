@@ -1,5 +1,5 @@
-// Get specified University
-// Endpoint: /university/{ucode}
+// Get specified Community
+// Endpoint: /community/{ccode}
 
 let mysql = require('mysql');
 let config = require('./config.json');
@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
   console.log(event);
   context.callbackWaitsForEmptyEventLoop = false;
   pool.getConnection(function (err, connection) {
-    let sqlquery = `SELECT * FROM University WHERE UCode='${event['pathParameters']['ucode']}';`;
+    let sqlquery = `SELECT * FROM Community WHERE CCode='${event['pathParameters']['ccode']}';`;
     connection.query(sqlquery, function (error, results, fields) {
       connection.release();
       let response = {
